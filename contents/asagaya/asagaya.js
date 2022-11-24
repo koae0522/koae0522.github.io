@@ -53,10 +53,17 @@ function Asagaya()
     nButton.value = "次の問題へ";
     nButton.id = "nButton";
 
+    
+    var oButton = document.createElement("input");
+    oButton.type = "button";
+    oButton.value = "終わる";
+    oButton.id = "oButton";
+
     var parent=document.getElementById("aButton");
     parent.appendChild(eButton);
     parent.appendChild(mButton);
     parent.appendChild(nButton);
+    parent.appendChild(oButton);
 
 }
 
@@ -76,7 +83,10 @@ $(document).on("click","#mButton",function(){
     
 $(document).on("click","#nButton",function(){
     Next();
+});
 
+$(document).on("click","#oButton",function(){
+    End();
 });
 
 function mAns()
@@ -91,7 +101,8 @@ function mAns()
     {
         setumei.innerText="不正解！";
     }
-    
+    mButton.disabled = true;
+    eButton.disabled = true;
 }
 
 function eAns()
@@ -106,6 +117,8 @@ function eAns()
     {
         setumei.innerText="不正解！";
     }
+    mButton.disabled = true;
+    eButton.disabled = true;
 }
 
 function Next()
@@ -113,6 +126,7 @@ function Next()
     document.getElementById("eButton").remove();
     document.getElementById("mButton").remove();
     document.getElementById("nButton").remove();
+    document.getElementById("oButton").remove();
     if( document.getElementById("start")!=null)
     {
          document.getElementById("start").remove();
@@ -120,4 +134,18 @@ function Next()
     que++;
     per=Math.trunc((score/que)*100);
     Asagaya();
+}
+
+function End()
+{
+    document.getElementById("eButton").remove();
+    document.getElementById("mButton").remove();
+    document.getElementById("nButton").remove();
+    document.getElementById("oButton").remove();
+
+    syasin.src="simai/simai.jpg";
+    setumei=document.getElementById("setumei").innerText="おつかれさま♪";
+
+    
+   
 }
