@@ -1,0 +1,16 @@
+body{
+    text-align: center;  
+    background-image: url("simai/back.jpg");
+    font-family:"游明朝";
+}
+
+img{
+    display:block;
+    margin:auto;
+    margin-bottom:20px;
+}
+
+#aButton,#eButton,#mButton{
+    margin: 20px;
+}
+
