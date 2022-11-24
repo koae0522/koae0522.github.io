@@ -1,0 +1,46 @@
+body{
+      text-align: center;  
+      background-image:url("../background/green.jpg");
+     margin-right:20%;
+}
+
+#content
+{
+    text-align: 50%;
+}
+
+h1{
+    font-family: "HG創英角ﾎﾟｯﾌﾟ体" ;
+    color: blue;
+    text-shadow: 3px 3px #fff200;
+    text-align:center;
+}
+
+h2
+{
+    border : medium ridge rgb(255, 160, 83);
+    border-width: 10px ;
+    display:inline-block;
+}
+
+table{
+    margin:auto;
+}
+
+#right
+{
+    position:absolute;
+    top:0;
+    right:0;
+    width:20%;
+    height: 100%;
+    text-align: center;
+    background-color: rgb(110, 188, 113);
+}
+
+
+iframe
+{
+    height:100%;
+    width:100%;
+}

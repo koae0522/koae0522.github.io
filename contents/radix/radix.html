@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>基数変換</title>
+  <meta charset="UTF-8">
+  <script src="radix.js"></script>
+</head>
+
+<body>
+  <h1>基数変換</h1>
+  <form>
+  <select id="before">
+    <option value="2"> 2</optiton>
+    <option value="10">10</option>
+    <option value="16">16</option>
+  </select>
+  進数を
+  <select id="after">
+    <option value="2">2</option>
+    <option value="10">10</option>
+    <option value="16">16</option>
+  </select>
+  進数に変換
+  <br>
+</select>
+
+変換前：
+<input type="text" name="beNum">
+<input type="button" value="変換！" onclick="conv(this.form)">
+<br>
+変換後：
+<output name="afNum">0</output>
+</form>
+</body>
