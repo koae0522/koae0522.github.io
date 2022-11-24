@@ -8,7 +8,7 @@ function Asagaya()
 {   
     
     //写真の枚数(最後の番号)
-    var imgNum=1;
+    var imgNum=10;
 
     //スタートボタン削除
     if( document.getElementById("start")!=null)
