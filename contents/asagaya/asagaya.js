@@ -146,13 +146,16 @@ function eAns()
 
     if(docci==0)
     {
-        document.getElementById("setumei").innerText="正解！";
-        var nButton = document.createElement("input");
-        nButton.type = "button";
-        nButton.value = "次の問題へ";
-        nButton.id = "nButton";
-        var parent=document.getElementById("aButton");
-        parent.appendChild(nButton);
+        if(h==true)
+        {
+            
+            var nButton = document.createElement("input");
+            nButton.type = "button";
+            nButton.value = "次の問題へ";
+            nButton.id = "nButton";
+            var parent=document.getElementById("aButton");
+            parent.appendChild(nButton);
+        }
         score++;
         con++;
     }
