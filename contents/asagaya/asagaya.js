@@ -10,8 +10,7 @@ function Hard()
 {
     h=true;
     Asagaya();
-}
-
+}//aa
 function Nomal()
 {
     h=false;
@@ -22,7 +21,7 @@ function Asagaya()
 {   
     console.log(h);
     //写真の枚数(最後の番号)
-    var imgNum=10;
+    var imgNum=30;
 
     //スタートボタン削除
     if( document.getElementById("start")!=null)
