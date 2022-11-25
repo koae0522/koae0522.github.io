@@ -146,6 +146,7 @@ function eAns()
 
     if(docci==0)
     {
+        document.getElementById("setumei").innerText="正解！";
         if(h==true)
         {
             
