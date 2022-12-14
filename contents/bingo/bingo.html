@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bingo.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="bingo.css" rel="stylesheet" />
     <script src="bingo.js"></script>
     <title>ビンゴマシーン</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 id="title">ビンゴ大会</h1>
     <h1 id="num">0</h1>
 
-    <input type="button" value="マシンを回す" onclick="S()" id="turn">
+    <input type="button" value="マシンを回す" onclick="S()" id="turn" />
 
     <h2>いままでの数字</h2>
     <table border="1">
       <tr>
         <th class="tL">B</th>
-        <th class="tN" id="b"></th>        
+        <th class="tN" id="b"></th>
       </tr>
       <tr>
         <th class="tL">I</th>
-        <th class="tN" id="i"></th>        
+        <th class="tN" id="i"></th>
       </tr>
       <tr>
         <th class="tL">N</th>
-        <th class="tN" id="n"></th>        
+        <th class="tN" id="n"></th>
       </tr>
       <tr>
         <th class="tL">G</th>
-        <th class="tN"id="g"></th>        
+        <th class="tN" id="g"></th>
       </tr>
       <tr>
         <th class="tL">O</th>
-        <th class="tN" id="o"></th>        
+        <th class="tN" id="o"></th>
       </tr>
     </table>
 
-
-   大会名 <input type="form" value="" id="name">
-   <input type="button" value="決定" onClick="Name()" id="nD">
-
-</body>
-
+    大会名 <input type="form" value="" id="name" />
+    <input type="button" value="決定" onClick="Name()" id="nD" />
+  </body>
 </html>
