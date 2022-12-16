@@ -10,6 +10,13 @@ var Nary = [];
 var Gary = [];
 var Oary = [];
 
+let nIntervId;
+
+
+function ready(){
+  document.getElementById("stop_button").style.display ="none";
+}
+
 function S() {
   if (first == true) {
     Start();
@@ -19,6 +26,9 @@ function S() {
 }
 
 function Start() {
+  document.getElementById("stop_button").style.display ="inline";
+  document.getElementById("start_button").style.display ="none";
+
   console.log("start");
   first = false;
   var i = 0;
@@ -38,12 +48,31 @@ function Start() {
 
   console.log(ary);
   console.log(first);
+
   Turn();
 }
 
 function Turn() {
   console.log("turn");
   nankai++;
+  document.getElementById("stop_button").style.display ="inline";
+  document.getElementById("start_button").style.display ="none";
+    if (!nIntervId) {
+      nIntervId = setInterval(Turn_anime, 100);
+    }
+  
+}
+
+function Turn_anime(){
+  var effect;
+  effect= Math.floor(Math.random()*(76));
+  document.getElementById("num").innerText =effect;
+}
+
+function Stop(){
+  clearInterval(nIntervId);
+  nIntervId = null;
+
   var n = (document.getElementById("num").innerText = ary[nankai - 1]);
   console.log(n);
   Aary.push(n);
@@ -78,14 +107,8 @@ function Turn() {
     Oary.sort();
     document.getElementById("o").innerText = Oary;
   }
-
-  console.log(Bary);
-  console.log(Iary);
-  console.log(Nary);
-  console.log(Gary);
-  console.log(Oary);
-
-  document.getElementById("imamade").innerText = Aary;
+  document.getElementById("stop_button").style.display ="none";
+  document.getElementById("start_button").style.display ="inline";
 }
 
 function Name() {

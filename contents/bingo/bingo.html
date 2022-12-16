@@ -10,10 +10,12 @@
   </head>
 
   <body>
+    <body onload="ready();"></body>
     <h1 id="title">ビンゴ大会</h1>
     <h1 id="num">0</h1>
 
-    <input type="button" value="マシンを回す" onclick="S()" id="turn" />
+    <input type="button" value="スタート！" onclick="S()" id="start_button" />
+    <input type="button" value="ストップ！" onclick="Stop()" id="stop_button" />
 
     <h2>いままでの数字</h2>
     <table border="1">
