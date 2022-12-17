@@ -7,19 +7,31 @@
     <link href="bingo.css" rel="stylesheet" />
     <script src="bingo.js"></script>
     <title>ビンゴマシーン</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
 
   <body>
     <body onload="ready();"></body>
-   <div id="title">
-    <h1 id="title_text">ビンゴ大会</h1>
-  </div>
+    <div id="title">
+      <h1 id="title_text">ビンゴ大会</h1>
+    </div>
     <h1 id="num">0</h1>
 
-    <input type="button" value="スタート！" onclick="S()" id="start_button" />
-    <input type="button" value="ストップ！" onclick="Stop()" id="stop_button" />
+    <input
+      type="button"
+      value="スタート！"
+      onclick="S()"
+      id="start_button"
+      class="button"
+    />
+    <input
+      type="button"
+      value="ストップ！"
+      onclick="Stop()"
+      id="stop_button"
+      class="button"
+    />
 
     <h2>いままでの数字</h2>
     <table border="1">

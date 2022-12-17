@@ -12,12 +12,16 @@ var Oary = [];
 
 let nIntervId;
 
+var drum = new Audio("image/drum.mp3");
+var cymbal = new Audio("image/cymbal.mp3");
 
-function ready(){
-  document.getElementById("stop_button").style.display ="none";
+function ready() {
+  document.getElementById("stop_button").style.display = "none";
 }
 
 function S() {
+  drum.currentTime = 0;
+  drum.play();
   if (first == true) {
     Start();
   } else {
@@ -26,8 +30,8 @@ function S() {
 }
 
 function Start() {
-  document.getElementById("stop_button").style.display ="inline";
-  document.getElementById("start_button").style.display ="none";
+  document.getElementById("stop_button").style.display = "inline";
+  document.getElementById("start_button").style.display = "none";
 
   console.log("start");
   first = false;
@@ -55,23 +59,25 @@ function Start() {
 function Turn() {
   console.log("turn");
   nankai++;
-  document.getElementById("stop_button").style.display ="inline";
-  document.getElementById("start_button").style.display ="none";
-    if (!nIntervId) {
-      nIntervId = setInterval(Turn_anime, 100);
-    }
-  
+  document.getElementById("stop_button").style.display = "inline";
+  document.getElementById("start_button").style.display = "none";
+  if (!nIntervId) {
+    nIntervId = setInterval(Turn_anime, 75);
+  }
 }
 
-function Turn_anime(){
+function Turn_anime() {
   var effect;
-  effect= Math.floor(Math.random()*(76));
-  document.getElementById("num").innerText =effect;
+  effect = Math.floor(Math.random() * 76);
+  document.getElementById("num").innerText = effect;
 }
 
-function Stop(){
+function Stop() {
   clearInterval(nIntervId);
   nIntervId = null;
+
+  drum.pause();
+  cymbal.play();
 
   var n = (document.getElementById("num").innerText = ary[nankai - 1]);
   console.log(n);
@@ -107,8 +113,8 @@ function Stop(){
     Oary.sort();
     document.getElementById("o").innerText = Oary;
   }
-  document.getElementById("stop_button").style.display ="none";
-  document.getElementById("start_button").style.display ="inline";
+  document.getElementById("stop_button").style.display = "none";
+  document.getElementById("start_button").style.display = "inline";
 }
 
 function Name() {
