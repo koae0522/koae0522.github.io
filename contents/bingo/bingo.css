@@ -1,5 +1,20 @@
 body{
     text-align: center;
+    background-image: url("image/bg.jpg");
+    background-position: top;
+    background-size:  cover;   
+}
+
+
+#title{
+    font-size:20px;
+    margin: 2em auto;
+ padding: 0;
+ width: 50%;
+ background-color: #ffffff; 
+border: 10px solid #924f11;
+box-shadow:0 10px 10px  0 #000000;
+font-family: serif;
 }
 
 table{
@@ -8,6 +23,9 @@ table{
 
 #num{
     font-size: 200px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-family: 'Fredoka One', cursive;
 }
 .tL{
     width:20px;

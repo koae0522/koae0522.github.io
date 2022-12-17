@@ -112,6 +112,6 @@ function Stop(){
 }
 
 function Name() {
-  document.getElementById("title").innerText =
+  document.getElementById("title_text").innerText =
     document.getElementById("name").value;
 }
