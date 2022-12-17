@@ -3,6 +3,7 @@ body {
   background-image: url("image/bg.jpg");
   background-position: top;
   background-size: cover;
+  font-family: "Kosugi Maru", sans-serif;
 }
 
 #title {
@@ -13,11 +14,12 @@ body {
   background-color: #ffffff;
   border: 10px solid #924f11;
   box-shadow: 0 10px 10px 0 #000000;
-  font-family: serif;
+  font-family: "Kosugi Maru", sans-serif;
 }
 
 .button {
   border-radius: 2vh;
+  font-family: "Kosugi Maru", sans-serif;
   font-size: 20px;
   width: 10%;
   padding: 20px;
