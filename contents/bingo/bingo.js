@@ -15,6 +15,10 @@ let nIntervId;
 var drum = new Audio("image/drum.mp3");
 var cymbal = new Audio("image/cymbal.mp3");
 
+const voice = new SpeechSynthesisUtterance();
+voice.lang = "ja-JP";
+voice.pitch = 1.2;
+
 function ready() {
   document.getElementById("stop_button").style.display = "none";
 }
@@ -33,7 +37,6 @@ function Start() {
   document.getElementById("stop_button").style.display = "inline";
   document.getElementById("start_button").style.display = "none";
 
-  console.log("start");
   first = false;
   var i = 0;
 
@@ -51,13 +54,11 @@ function Start() {
   }
 
   console.log(ary);
-  console.log(first);
 
   Turn();
 }
 
 function Turn() {
-  console.log("turn");
   nankai++;
   document.getElementById("stop_button").style.display = "inline";
   document.getElementById("start_button").style.display = "none";
@@ -80,7 +81,16 @@ function Stop() {
   cymbal.play();
 
   var n = (document.getElementById("num").innerText = ary[nankai - 1]);
+
   console.log(n);
+
+  if (document.getElementById("speach_check").checked) {
+    voice.text = n;
+    window.setTimeout(function () {
+      speechSynthesis.speak(voice);
+    }, 700);
+  }
+
   Aary.push(n);
   Aary.sort(function (a, b) {
     if (a < b) return -1;
@@ -88,7 +98,7 @@ function Stop() {
     return 0;
   });
 
-  if (n < 15) {
+  if (n <= 15) {
     Bary.push(n);
     Bary.sort(function (a, b) {
       if (a < b) return -1;
@@ -96,25 +106,41 @@ function Stop() {
       return 0;
     });
     document.getElementById("b").innerText = Bary;
-  } else if (n < 30) {
+  } else if (n <= 30) {
     Iary.push(n);
     Iary.sort();
     document.getElementById("i").innerText = Iary;
-  } else if (n < 45) {
+  } else if (n <= 45) {
     Nary.push(n);
     Nary.sort();
     document.getElementById("n").innerText = Nary;
-  } else if (n < 60) {
+  } else if (n <= 60) {
     Gary.push(n);
     Gary.sort();
     document.getElementById("g").innerText = Gary;
-  } else if (n < 75) {
+  } else if (n <= 75) {
     Oary.push(n);
     Oary.sort();
     document.getElementById("o").innerText = Oary;
   }
+
   document.getElementById("stop_button").style.display = "none";
   document.getElementById("start_button").style.display = "inline";
+}
+
+function Speach_numbers() {
+  voice.text =
+    "いままでの数字を読み上げます。" +
+    Bary +
+    "," +
+    Iary +
+    "," +
+    Nary +
+    "," +
+    Gary +
+    "," +
+    Oary;
+  speechSynthesis.speak(voice);
 }
 
 function Name() {
