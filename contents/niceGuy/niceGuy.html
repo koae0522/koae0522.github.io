@@ -5,35 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="niceGuy.css" rel="stylesheet">
-    <script src="niceGuy.js"></script>
-    <title>Document</title>
+ 
+    <title>いい奴だったよシミュレーター</title>
 </head>
+
 <body>
+    
     <h1>～いい奴だったよシミュレーター～</h1>
     
     <div class="main">
         <img src="background/bg1.jpg" class="bg">
-        <img src="../../image/icon-kirinuki.png" class="img">
+        <img src="niceguy/niceguy1.png" class="img">
         <h2 class="serif">
             いままでありがとう...
         </h2>
     </div>
+
     <div class="change">
+
+        <div class="niceGuyChange">
         <h3>いい奴を変更する</h3>
-        <select name="goodguyChange">
+        <form name="niceGuyChange_Form">
+            サンプルから選択
+        <select id="niceGuyChange_Select">
             <option value="1">フリー素材の男性1</option>
-            <option value="2"></option>
-            <option value="3"></option>
-            <option value="4"></option>
+            <option value="2">フリー素材の男性2</option>
+            <option value="3">フリー素材の女性1</option>
+            <option value="4">フリー素材の女性2</option>
+            <option value="5">マッチョ1</option>
+            <option value="6">マッチョ2</option>
         </select>
+        <input type="button" value="変更" id="niceguy_changeButton">
+        <br>
+        ローカルから選択
+        <input type="file" id="niceGuyChange_Input">
+    </form>
+    </div>
+
+    <div class="backgroundChange">
         <h3>背景を変更する</h3>
-        <select name="backgroundChange">
+        サンプルから選択
+        <select id="backgroundChange_Select">
             <option value="1">函館山</option>
             <option value="2">海と函館山</option>
             <option value="3">海</option>
         </select>
-        <h3>セリフを変更する</h3>
-        <input type="text" name="serifChange" size="50"></input>
+        <input type="button" value="変更" id="background_changeButton">
+        <br>
+        ローカルから選択
+        <input type="file" id="backgroundChange_Input">
     </div>
+
+    <div class="serifChange">
+        <h3>セリフを変更する</h3>
+        <input type="text" id="serifChange_Form" size="50"></input>
+        <input type="button" value="変更" id="serif_changeButton">
+    </div>
+
+    <script src="niceGuy.js"></script>
+
 </body>
 </html>
