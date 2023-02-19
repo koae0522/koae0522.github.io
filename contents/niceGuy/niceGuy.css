@@ -1,0 +1,38 @@
+.main {
+    position: relative;
+}
+
+h1{
+    font-family: 游明朝;
+}
+
+.bg {
+    width: 100%;
+}
+
+.serif{
+    position:absolute;
+    font-family: "游明朝";
+    right:20%;
+    top:10%;
+    font-size: 4vw;
+    opacity: 0.5;
+    transition: 2s;
+}
+.img {
+    position:absolute;
+    right: 66%;
+    bottom: 55%;
+    width: 25%;
+    opacity: 0.5;
+    transition: 2s;
+}
+
+.img:hover +.serif{
+    opacity: 0;
+}
+
+.img:hover{
+    opacity: 0;
+}
+
