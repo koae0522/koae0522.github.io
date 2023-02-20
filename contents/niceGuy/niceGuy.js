@@ -70,3 +70,21 @@ inputfile.addEventListener(
   },
   false
 );
+
+//画像ダウンロード
+let dl=function(){
+
+  let link=document.getElementById("dlButton");
+  let fun=function () {
+    //canvasにmainを描画
+   let canvas=html2canvas(document.querySelector("#main")).then(canvas => {
+    
+      document.body.appendChild(canvas)
+  });
+        //linkエレメントにaタグを作成してクリックさせてダウンロード
+        const link=document.createElement("a");
+        link.href=canvas.toDataURL();
+  }
+  link.addEventListener("click",fun,false);
+}
+window.addEventListener("load",dl,false);
