@@ -78,12 +78,11 @@ let dl=function(){
   let fun=function () {
     //canvasにmainを描画
    let canvas=html2canvas(document.querySelector("#main")).then(canvas => {
-    
-      document.body.appendChild(canvas)
+    let downloadEle = document.createElement("a");
+    downloadEle.href = canvas.toDataURL("image/png");
+    downloadEle.download = "いい奴だったよ.jpg";
+    downloadEle.click();
   });
-        //linkエレメントにaタグを作成してクリックさせてダウンロード
-        const link=document.createElement("a");
-        link.href=canvas.toDataURL();
   }
   link.addEventListener("click",fun,false);
 }

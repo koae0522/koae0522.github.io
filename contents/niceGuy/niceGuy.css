@@ -1,7 +1,13 @@
+body{
+  background: radial-gradient( rgb(221, 227, 231), rgb(64, 102, 140));
+}
 #main {
   position: relative;
   margin: 0;
   padding: 0;
+}
+.menu{
+ font-family: "M PLUS Rounded 1c";
 }
 
 h1 {
