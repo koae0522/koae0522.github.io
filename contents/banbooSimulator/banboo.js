@@ -2,6 +2,7 @@
 
     if(localStorage.firstFlug==null)
     {
+        //初めて訪問した時の処理
         localStorage.firstTime=Math.floor(nowTime.getTime()/(1000*60));
         localStorage.firstFlug=false;
         console.log("はじめてです");
@@ -58,6 +59,35 @@
             imgElm.style.height=heightPx+"px";
         }
            
+        //時刻によって背景変更
+        time=nowTime.getHours();
+        let textElm=document.getElementById("text");
+        let bodyElm=document.body;
+        time=10;
+        //夜 19~5
+        if(time>=19||time<5)
+        {
+            textElm.style.color="#FFFFFF";
+            bodyElm.style.background="linear-gradient(to bottom, #000000, #0c1b33)";
+        }
+        //朝 5~9
+        else if(time>=5&&time<9)
+        {
+            textElm.style.color="#000000";
+            bodyElm.style.background="linear-gradient(to bottom, #75d6ff, #ffffff)";
+        }
+        //昼 9~16
+        else if(time>=9&&time<16)
+        {
+            textElm.style.color="#000000";
+            bodyElm.style.background="linear-gradient(to bottom, #87cefa, #98fb98)";
+        }
+        //夕方 16~19
+        else if(time>=16&&time<19)
+        {
+            textElm.style.color="#000000";
+            bodyElm.style.background="linear-gradient(to bottom, #ff8c00, #ffd700)";
+        }
     }
 
 
