@@ -1,12 +1,10 @@
-#img {
+#img{
     width: 10%;
     height: 100%;
 }
 
-body {
+body{
     text-align: center;
     background: linear-gradient(to bottom, #000000, #0c1b33);
-
     height: 100vh;
-
 }

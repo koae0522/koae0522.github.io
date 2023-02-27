@@ -30,7 +30,7 @@
         let banbooHeight=document.getElementById("banbooHeight");
 
         //テスト用強制成長コード
-        //localStorage.currentHeight=10;
+        //localStorage.currentHeight=100;
 
         //高さ表示
         if(localStorage.currentHeight<100)
@@ -63,7 +63,8 @@
         time=nowTime.getHours();
         let textElm=document.getElementById("text");
         let bodyElm=document.body;
-        
+        time=16;
+
         //夜 19~5
         if(time>=19||time<5)
         {
