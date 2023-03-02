@@ -93,7 +93,6 @@
 
     function tweet(){
         let text="私の竹は"+document.getElementById("banbooHeight").innerHTML+"になりました";
-        window.open("https://twitter.com/share?text="+
-        +text);
+        window.open("https://twitter.com/share?text="+text);
     }
 
