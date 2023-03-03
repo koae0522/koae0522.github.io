@@ -5,7 +5,9 @@
         //初めて訪問した時の処理
         localStorage.firstTime=Math.floor(nowTime.getTime()/(1000*60));
         localStorage.firstFlug=false;
+        localStorage.currentHeight=0;
         console.log("はじめてです");
+        bamboo();
     }
     else
     {
@@ -30,7 +32,8 @@
         let banbooHeight=document.getElementById("banbooHeight");
 
         //テスト用強制成長コード
-       // localStorage.currentHeight=150.120000001;
+        //localStorage.currentHeight=3643.64;
+        let h=Number("localStorage.currentHeight");
 
         //高さ表示
         if(localStorage.currentHeight<100)
@@ -45,7 +48,7 @@
            String(localStorage.currentHeight).split(".")[1].charAt(1)
            +"mm";
         }
-        
+ 
         //画像表示
         if(localStorage.currentHeight<50)
         {
@@ -66,7 +69,7 @@
         time=nowTime.getHours();
         let textElm=document.getElementById("text");
         let bodyElm=document.body;
-
+        time=10;
 
         //夜 19~5
         if(time>=19||time<5)
@@ -97,7 +100,7 @@
 
     let tweetbtn=document.getElementById("tweet");
     tweetbtn.addEventListener("click",()=>{
-        let text="私の竹は"+document.getElementById("banbooHeight").innerHTML+"になりました"+"koae0522.github.io/contents/banbooSimulator/banboo.html";
+        let text="わたしの竹は"+document.getElementById("banbooHeight").innerHTML+"になりました"+"koae0522.github.io/contents/banbooSimulator/banboo.html";
         window.open("https://twitter.com/share?text="+text);
     });
        
