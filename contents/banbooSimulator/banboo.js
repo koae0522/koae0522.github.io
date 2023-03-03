@@ -12,12 +12,13 @@
     else
     {
         bamboo();
-        //一分ごとに更新
-        setInterval("bamboo()", 60000);
+        setInterval("bamboo()", 6000);
     }
 
     function bamboo()
     {
+        let nowTime=new Date();
+
         //高さ計算
        // console.log("はじめてじゃない");
        // console.log("最初時刻"+localStorage.firstTime);
