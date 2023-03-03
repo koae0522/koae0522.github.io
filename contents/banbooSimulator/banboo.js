@@ -30,7 +30,7 @@
         let banbooHeight=document.getElementById("banbooHeight");
 
         //テスト用強制成長コード
-        //localStorage.currentHeight=50;
+        localStorage.currentHeight=150.11;
 
         //高さ表示
         if(localStorage.currentHeight<100)
@@ -40,7 +40,8 @@
         else
         {
             banbooHeight.innerHTML=Math.floor(localStorage.currentHeight/100)+"m"
-            +(localStorage.currentHeight % 100)+"cm";
+            +Math.floor(localStorage.currentHeight % 100)+"cm"+
+           String(localStorage.currentHeight).split(".")[1]+"mm";
         }
         
         //画像表示
