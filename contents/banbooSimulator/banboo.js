@@ -70,7 +70,7 @@
         time=nowTime.getHours();
         let textElm=document.getElementById("text");
         let bodyElm=document.body;
-        time=10;
+        //time=10;
 
         //夜 19~5
         if(time>=19||time<5)
