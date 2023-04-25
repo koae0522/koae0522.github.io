@@ -4,32 +4,59 @@ phina.globalize();
 //サイズ指定用の定数
 var SCREEN_X = 900;
 var SCREEN_Y = 600;
+var pointed=false;
 
-var blueCat={
+var ASSETS={
     image:{
         "bluecat":"image/cat_blue.png",
+        "bg":"image/background.png",
     },
   };
 
 // MainScene クラスを定義
 phina.define('MainScene', {
     superClass: 'CanvasScene',
-    init: function(option) {    //ここにoptionを追加
-      this.superInit(option);   //こっちにも
+    init: function(option) {    
+      this.superInit(option);
+
       // 背景色を指定
-      this.backgroundColor = '#444';
+      this.bg=Sprite("bg").addChildTo(this);
+      this.bg.origin.set(0, 0);
+      this.bg.width = SCREEN_X;
+      this.bg.height = SCREEN_Y;
 
       var cat=Sprite('bluecat').addChildTo(this).setPosition(320, 480).setSize(50,50);
      
-    //マウスに追従させる
+      
+    //ねこ
+
     cat.setInteractive(true);
-    cat.onpointmove=function(){
-        cat.update = function(app){
-            this.x = app.pointer.x; // x 座標
-            this.y = app.pointer.y; // y 座標
-            this.text=`${Math.round(this.x)},${Math.round(this.y)}`
-          };
+    cat.onpointstart=function(){
+     pointed=true; 
+    };
+
+    cat.onpointend=function(){
+      pointed=false; 
+      if(this.x<=300){
+        this.update=function(){
+          this.rotation++;
+          if(this.scaleX>=0){
+            this.scaleX-=0.005;
+            this.scaleY-=0.005;
+          }
+          else{
+            this.hide();
+          }
+        }
+      }
+     };
+
+    cat.update = function(app){
+    if(pointed==true){
+      this.x = app.pointer.x; 
+      this.y = app.pointer.y; 
     }
+    };
     
     },
   });
@@ -42,7 +69,7 @@ phina.main(function() {
     //ここでscreenのサイズを変更 ここはOK
     width: SCREEN_X,
     height: SCREEN_Y,
-    assets: blueCat,
+    assets: ASSETS,
   });
   // アプリケーション実行
   app.run();
