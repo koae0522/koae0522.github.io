@@ -4,40 +4,75 @@ phina.globalize();
 //サイズ指定用の定数
 var SCREEN_X = 900;
 var SCREEN_Y = 600;
-var pointed=false;
+let scoreLabel;
+let score=0;
 
-var ASSETS={
+var blueCat={
     image:{
         "bluecat":"image/cat_blue.png",
+        "pinkcat":"image/cat_pink.png",
         "bg":"image/background.png",
     },
   };
 
+
 // MainScene クラスを定義
 phina.define('MainScene', {
     superClass: 'CanvasScene',
-    init: function(option) {    
-      this.superInit(option);
+    init: function(option) {    //ここにoptionを追加
+      this.superInit(option);   //こっちにも
 
       // 背景色を指定
-      this.bg=Sprite("bg").addChildTo(this);
+      this.backgroundColor = '#444';
+      this.bg = Sprite("bg").addChildTo(this);
       this.bg.origin.set(0, 0);
-      this.bg.width = SCREEN_X;
-      this.bg.height = SCREEN_Y;
 
-      var cat=Sprite('bluecat').addChildTo(this).setPosition(320, 480).setSize(50,50);
-     
+
+      scoreLabel=Label(`スコア:${score}`).addChildTo(this).setPosition(SCREEN_X /2,30);
       
-    //ねこ
+      for(let i=0;i<30;i++){
+        let ran=Math.randint(0,1);
+        let color;
+        let img;
+        if(ran==0)
+        {
+          color="blue";
+          img="bluecat";
+        }
+        else{
+          color="pink";
+          img="pinkcat";
+        }  
+        cat(color,img).addChildTo(this);
+      }
 
-    cat.setInteractive(true);
-    cat.onpointstart=function(){
-     pointed=true; 
-    };
 
-    cat.onpointend=function(){
-      pointed=false; 
-      if(this.x<=300){
+    },
+  });
+
+  //ねこクラス
+  phina.define("cat",{
+
+    superClass:"Sprite",
+
+    init:function(color,image){
+      this.superInit(image);
+      this.color=color;
+      this.setSize(50,50);
+      this.setPosition(Math.randint(330,570),Math.randint(50,600));
+      this.pointed=false;
+      this.setInteractive(true);
+    },
+
+    onpointstart:function(){
+      this.pointed=true; 
+     },
+
+     onpointend:function(){
+      this.pointed=false; 
+
+      //正解
+      if(this.color=="blue"&&this.x<=300||this.color=="pink"&&this.x>=600){
         this.update=function(){
           this.rotation++;
           if(this.scaleX>=0){
@@ -47,18 +82,29 @@ phina.define('MainScene', {
           else{
             this.hide();
           }
+        }          
+        score++;
+        scoreLabel.text=`スコア:${score}`;
+      }
+
+      //不正解
+      if(this.color=="blue"&&this.x>=600||this.color=="pink"&&this.x<=300){
+        this.update=function(){
+          if(this.scaleX>=0){
+            this.scaleX+=0.5;
+            this.scaleY+=0.5;
+          }
         }
       }
-     };
-
-    cat.update = function(app){
-    if(pointed==true){
-      this.x = app.pointer.x; 
-      this.y = app.pointer.y; 
-    }
-    };
-    
-    },
+     },
+     
+     update:function(app){
+      if(this.pointed==true){
+        this.x = app.pointer.x; 
+        this.y = app.pointer.y; 
+      };
+      //動かしたい
+     },
   });
 
 // メイン処理
@@ -69,7 +115,7 @@ phina.main(function() {
     //ここでscreenのサイズを変更 ここはOK
     width: SCREEN_X,
     height: SCREEN_Y,
-    assets: ASSETS,
+    assets: blueCat,
   });
   // アプリケーション実行
   app.run();
