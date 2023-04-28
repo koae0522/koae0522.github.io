@@ -118,15 +118,15 @@ phina.define('MainScene', {
         this.y = app.pointer.y; 
       }
       //動かす
-      // else if(this.pointed==false||this.x>=320||this.x<=580||this.y<=580||this.y>=20){
-      //   this.x+=this.dirX;
-      //   this.y+=this.dirY;
-      //   if(this.x<=320||this.x>=580||this.y>=580||this.y<=20){
-      //     this.dirX=-this.dirX;
-      //     this.dirY=-this.dirY;
-      //     this.scaleX *= -1;
-      //   }
-      // }
+      else if(this.pointed==false||this.x>=320||this.x<=580||this.y<=580||this.y>=20){
+        this.x+=this.dirX;
+        this.y+=this.dirY;
+        if(this.x<=320||this.x>=580||this.y>=580||this.y<=20){
+          this.dirX=-this.dirX;
+          this.dirY=-this.dirY;
+          this.scaleX *= -1;
+        }
+      }
      },
   });
 
