@@ -53,21 +53,34 @@ phina.define('MainScene', {
   //ねこクラス
   phina.define("cat",{
 
+    //Spriteクラスを継承
     superClass:"Sprite",
 
+    //初期化
     init:function(color,image){
       this.superInit(image);
       this.color=color;
       this.setSize(50,50);
-      this.setPosition(Math.randint(330,570),Math.randint(50,600));
+      this.setPosition(Math.randint(330,570),Math.randint(50,580));
       this.pointed=false;
+      this.time=0;
+      this.dirX=Math.randint(-4,4);
+      this.dirY=Math.randint(-4,4);
+
+      if(this.dirX>0)
+      {
+        this.scaleX *= -1;
+      }
+
       this.setInteractive(true);
     },
 
+     //押したとき
     onpointstart:function(){
       this.pointed=true; 
      },
 
+     //離したとき
      onpointend:function(){
       this.pointed=false; 
 
@@ -98,12 +111,22 @@ phina.define('MainScene', {
       }
      },
      
+     //ずっと繰り返し
      update:function(app){
       if(this.pointed==true){
         this.x = app.pointer.x; 
         this.y = app.pointer.y; 
-      };
-      //動かしたい
+      }
+      //動かす
+      // else if(this.pointed==false||this.x>=320||this.x<=580||this.y<=580||this.y>=20){
+      //   this.x+=this.dirX;
+      //   this.y+=this.dirY;
+      //   if(this.x<=320||this.x>=580||this.y>=580||this.y<=20){
+      //     this.dirX=-this.dirX;
+      //     this.dirY=-this.dirY;
+      //     this.scaleX *= -1;
+      //   }
+      // }
      },
   });
 
