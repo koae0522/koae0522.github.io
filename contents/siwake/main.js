@@ -7,7 +7,7 @@ let SCREEN_Y = 600;
 
 let scoreLabel;
 let score=0;
-let interval=2;
+let interval=3;
 let previousTime=0;
 
 var blueCat={
@@ -33,17 +33,25 @@ phina.define('MainScene', {
       scoreLabel=Label(`スコア:${score}`).addChildTo(this).setPosition(SCREEN_X /2,30);
     },
 
-    //ねこ生成
+    //インターバルごとにねこ生成関数呼び出し
     update: function(app){
 
+      console.log(interval);
       let gameTime=Math.floor(app.elapsedTime / 1000);
 
       if((gameTime-previousTime)>interval||interval<=0.3&&(gameTime-previousTime)>interval){
         previousTime=gameTime;
-        if(interval>0.1){
-          interval-=0.5;
+        if(interval>0.3){
+          interval-=0.3;
         }
-        let ran=Math.randint(0,1);
+        this.generate();
+      }
+
+    },
+
+    //ねこ生成
+    generate:function(){
+      let ran=Math.randint(0,1);
         let color;
         let img;
         if(ran==0)
@@ -56,10 +64,7 @@ phina.define('MainScene', {
           img="pinkcat";
         }  
         cat(color,img).addChildTo(this);
-      }
-
     },
-
   
   });
 
@@ -73,17 +78,19 @@ phina.define('MainScene', {
     init:function(color,image){
       this.superInit(image);
       this.color=color;
-      this.setSize(50,50);
+      this.setSize(1,1);
       this.setPosition(Math.randint(330,570),Math.randint(50,580));
       this.pointed=false;
       this.time=0;
       this.dirX=Math.randint(-4,4);
       this.dirY=Math.randint(-4,4);
-
+      
       if(this.dirX>0)
       {
         this.scaleX *= -1;
       }
+      
+      this.tweener.scaleTo(50,1000 ,"easeOutCubic").play();
 
       this.setInteractive(true);
     },
@@ -99,21 +106,11 @@ phina.define('MainScene', {
 
       //正解
       if(this.color=="blue"&&this.x<=300||this.color=="pink"&&this.x>=600){
-        this.update=function(){
-          this.rotation++;
-          if(this.scaleX>0){
-            this.scaleX-=0.005;
-            this.scaleY-=0.005;
-          }
-          else if(this.scaleX<0){
-            this.scaleX+=0.005;
-            this.scaleY-=0.005;
-          }
-          else if(this.scaleX==0){
-            this.hide();
-          }
-
-        }          
+        this.setInteractive(false);
+        this.rotation++;
+        this.tweener.scaleTo(0,3000).play();
+        this.tweener.fade(0,3000).play();
+        this.tweener.rotateTo(45, 3000).play().
         score++;
         scoreLabel.text=`スコア:${score}`;
 
@@ -121,24 +118,26 @@ phina.define('MainScene', {
 
       //不正解
       if(this.color=="blue"&&this.x>=600||this.color=="pink"&&this.x<=300){
-        this.update=function(){
-          if(this.scaleX>0){
-            this.scaleX+=0.5;
-            this.scaleY+=0.5;
-          }
-          else if(this.scaleX<0){
-            this.scaleX-=0.5;
-            this.scaleY+=0.5;
-          }
-          else if(this.scaleX==0){
-            this.hide();
-          }
-        
-        }
+        this.setInteractive(false);
+        this.big();
         console.log("不正解");
       }
      },
      
+     //でかくする関数
+     big:function(){
+        if(this.scaleX>0){
+          this.tweener.scaleTo(1000,3000).play();
+        }
+        else if(this.scaleX<0){
+          this.tweener.scaleTo(1000,3000).play();
+        }
+        else if(this.scaleX==0){
+          this.hide();
+        }
+      
+     },
+
      //ずっと繰り返し
      update:function(app){
       //マウスに追従
@@ -147,7 +146,7 @@ phina.define('MainScene', {
         this.y = app.pointer.y; 
       }
       //マウスでポイントされてないとき動かす
-      else if(this.pointed==false&&(this.x>=320||this.x<=580||this.y<=580||this.y>=20)){
+      else if(this.pointed==false&&(this.x>=320||this.x<=580||this.y<=580||this.y>=20)&&this.scaleY==50){
         this.x+=this.dirX;
         this.y+=this.dirY;
 
@@ -161,6 +160,8 @@ phina.define('MainScene', {
         }
      
         }
+
+
       }
      },
   );
