@@ -29,23 +29,22 @@ phina.define('MainScene', {
       this.backgroundColor = '#444';
       this.bg = Sprite("bg").addChildTo(this);
       this.bg.origin.set(0, 0);
-      
+      this.generate();
       scoreLabel=Label(`スコア:${score}`).addChildTo(this).setPosition(SCREEN_X /2,30);
     },
 
     //インターバルごとにねこ生成関数呼び出し
     update: function(app){
 
-      console.log(interval);
       let gameTime=Math.floor(app.elapsedTime / 1000);
 
-      if((gameTime-previousTime)>interval||interval<=0.3&&(gameTime-previousTime)>interval){
-        previousTime=gameTime;
-        if(interval>0.3){
-          interval-=0.3;
-        }
-        this.generate();
-      }
+      // if((gameTime-previousTime)>interval||interval<=0.3&&(gameTime-previousTime)>interval){
+      //   previousTime=gameTime;
+      //   if(interval>0.3){
+      //     interval-=0.3;
+      //   }
+      //   this.generate();
+      // }
 
     },
 
@@ -84,13 +83,17 @@ phina.define('MainScene', {
       this.time=0;
       this.dirX=Math.randint(-4,4);
       this.dirY=Math.randint(-4,4);
-      
-      if(this.dirX>0)
+      this.finish=false;
+      this.syokibidou=false;
+
+      if(this.dirX<0)
       {
-        this.scaleX *= -1;
+        this.tweener.scaleTo(50,1000 ,"easeOutElastic").play();
       }
-      
-      this.tweener.scaleTo(50,1000 ,"easeOutCubic").play();
+      else{
+        this.tweener.to({scaleX:-50,scaleY:50},1000,"easeOutElastic").play();
+      }
+    
 
       this.setInteractive(true);
     },
@@ -106,11 +109,10 @@ phina.define('MainScene', {
 
       //正解
       if(this.color=="blue"&&this.x<=300||this.color=="pink"&&this.x>=600){
+        this.finish=true;
         this.setInteractive(false);
         this.rotation++;
         this.tweener.scaleTo(0,3000).play();
-        this.tweener.fade(0,3000).play();
-        this.tweener.rotateTo(45, 3000).play().
         score++;
         scoreLabel.text=`スコア:${score}`;
 
@@ -118,6 +120,7 @@ phina.define('MainScene', {
 
       //不正解
       if(this.color=="blue"&&this.x>=600||this.color=="pink"&&this.x<=300){
+        this.finish=true;
         this.setInteractive(false);
         this.big();
         console.log("不正解");
@@ -126,14 +129,12 @@ phina.define('MainScene', {
      
      //でかくする関数
      big:function(){
+      console.log("big")
         if(this.scaleX>0){
-          this.tweener.scaleTo(1000,3000).play();
+          this.tweener.to({scaleX:1000,scaleY:1000,rotation:0},1000,"easeOutElastic").play();
         }
         else if(this.scaleX<0){
-          this.tweener.scaleTo(1000,3000).play();
-        }
-        else if(this.scaleX==0){
-          this.hide();
+          this.tweener.to({scaleX:-1000,scaleY:1000,rotation:0},1000,"easeOutElastic").play();
         }
       
      },
@@ -141,12 +142,13 @@ phina.define('MainScene', {
      //ずっと繰り返し
      update:function(app){
       //マウスに追従
-      if(this.pointed==true){
+      if(this.pointed==true && this.finish==false){
         this.x = app.pointer.x; 
         this.y = app.pointer.y; 
       }
       //マウスでポイントされてないとき動かす
-      else if(this.pointed==false&&(this.x>=320||this.x<=580||this.y<=580||this.y>=20)&&this.scaleY==50){
+      else if(this.pointed==false&&(this.x>=320||this.x<=580||this.y<=580||this.y>=20) 
+              && this.scaleY==50){
         this.x+=this.dirX;
         this.y+=this.dirY;
 
@@ -161,6 +163,19 @@ phina.define('MainScene', {
      
         }
 
+        //時限爆弾
+        this.time+=app.deltaTime;
+        console.log(Math.floor(this.time/1000));
+        if((Math.floor(this.time/1000)>=3)&& ((Math.floor(this.time/1000))<5)&& this.syokibidou==false){
+          this.tweener.rotateTo(15,50).rotateTo(-15,50).setLoop(true).play();
+          this.syokibidou=true;
+          console.log("a")
+        }else  if(Math.floor(this.time/1000)>=8 &&  this.finish==false &&  this.syokibidou==true){
+          this.big();
+          this.tweener.rotateTo(0,0).setLoop(false).play();
+          this.finish=true;
+          console.log("b")
+        }
 
       }
      },
