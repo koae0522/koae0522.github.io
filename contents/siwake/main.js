@@ -109,10 +109,11 @@ phina.define('MainScene', {
 
       //正解
       if(this.color=="blue"&&this.x<=300||this.color=="pink"&&this.x>=600){
+        console.log("正解")
         this.finish=true;
         this.setInteractive(false);
         this.rotation++;
-        this.tweener.scaleTo(0,3000).play();
+        this.tweener.scaleTo(0,3000).setLoop(false).play();
         score++;
         scoreLabel.text=`スコア:${score}`;
 
@@ -131,10 +132,10 @@ phina.define('MainScene', {
      big:function(){
       console.log("big")
         if(this.scaleX>0){
-          this.tweener.to({scaleX:1000,scaleY:1000,rotation:0},1000,"easeOutElastic").play();
+          this.tweener.to({scaleX:1000,scaleY:1000,rotation:0},1000,"easeOutElastic").setLoop(false).play();
         }
         else if(this.scaleX<0){
-          this.tweener.to({scaleX:-1000,scaleY:1000,rotation:0},1000,"easeOutElastic").play();
+          this.tweener.to({scaleX:-1000,scaleY:1000,rotation:0},1000,"easeOutElastic").setLoop(false).play();
         }
       
      },
@@ -164,18 +165,21 @@ phina.define('MainScene', {
         }
 
         //時限爆弾
-        this.time+=app.deltaTime;
+        if(this.finish==false){
+           this.time+=app.deltaTime;
         console.log(Math.floor(this.time/1000));
-        if((Math.floor(this.time/1000)>=3)&& ((Math.floor(this.time/1000))<5)&& this.syokibidou==false){
+        if((Math.floor(this.time/1000)>=3)&& ((Math.floor(this.time/1000))<5)&& this.syokibidou==false&& this.finish==false){
           this.tweener.rotateTo(15,50).rotateTo(-15,50).setLoop(true).play();
           this.syokibidou=true;
           console.log("a")
-        }else  if(Math.floor(this.time/1000)>=8 &&  this.finish==false &&  this.syokibidou==true){
+        }else  if(Math.floor(this.time/1000)>=8 &&  this.finish==false &&  this.syokibidou==true && this.finish==false){
           this.big();
           this.tweener.rotateTo(0,0).setLoop(false).play();
           this.finish=true;
           console.log("b")
         }
+        }
+       
 
       }
      },
