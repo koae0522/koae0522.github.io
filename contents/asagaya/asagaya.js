@@ -5,10 +5,14 @@ var que=0;//問題数
 var per=0;//正解率
 var con=0;//連続正解数
 var h=false;//ハードか true=ハード　false=ノーマル
+var count=60;//カウントダウンののこり秒数
+var start_f = false; //カウントダウンスタートフラグ
 
 function Hard()
 {
     h=true;
+    count=60;
+    CountStart()
     Asagaya();
 }//aa
 function Nomal()
@@ -50,10 +54,14 @@ function Asagaya()
     if(h==false)//ノーマル
     {
         var s=document.getElementById("score").innerText="正解数"+que+"問中"+score+"問 正答率"+per+"%";
+        var t=document.getElementById("time").innerText="";
+       
     }
     else//ハード
     {
         var s=document.getElementById("score").innerText="連続正解数"+con+"問 ";
+        var t=document.getElementById("time").innerText="残り時間"+count+"秒";
+        
     }
     
     //乱数生成
@@ -199,6 +207,10 @@ function End()
 {
     document.getElementById("eButton").remove();
     document.getElementById("mButton").remove();
+    if(h==true){
+        clearInterval(interval)
+    }
+    var t=document.getElementById("time").innerText="";
      if( document.getElementById("nButton")!=null)
     {
         document.getElementById("nButton").remove();
@@ -209,10 +221,15 @@ function End()
     }
 
 
+
     syasin.src="simai/simai.jpg";
     if(h==true)
     {
         setumei=document.getElementById("setumei").innerText="ごめんあそばせ♪";
+        if(count===0){
+            setumei=document.getElementById("setumei").innerText="お時間が来たようね♪";
+        }
+        var t=document.getElementById("time").innerText="";
     }
     else
     {
@@ -276,6 +293,23 @@ function MoreH()
     con=0;
     Hard();
 }
+
+
+function CountStart(){
+    console.log("CountStarts")
+    interval =setInterval(function(){
+    if(count===1){
+        clearInterval(interval)
+        End()
+    }else{
+        count--;
+        var t=document.getElementById("time").innerText="残り時間"+count+"秒";
+        console.log(count)
+    }
+    },1000)
+}
+
+
 
 $(document).on("click","#eButton",function(){
     eAns();
