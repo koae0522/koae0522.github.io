@@ -123,18 +123,19 @@ function mAns()
     if(docci==1)
     {
         document.getElementById("setumei").innerText="正解！";
-        if(h==true)
-        {
-            
-            var nButton = document.createElement("input");
-            nButton.type = "button";
-            nButton.value = "次の問題へ";
-            nButton.id = "nButton";
-            var parent=document.getElementById("aButton");
-            parent.appendChild(nButton);
-        }
         score++;
         con++;
+        if(h==true)
+        {
+            // var nButton = document.createElement("input");
+            // nButton.type = "button";
+            // nButton.value = "次の問題へ";
+            // nButton.id = "nButton";
+            // var parent=document.getElementById("aButton");
+            // parent.appendChild(nButton);
+            Next()
+        }
+        
     }
     else
     {
@@ -145,8 +146,12 @@ function mAns()
             End();
         }
     }
-    mButton.disabled = true;
-    eButton.disabled = true;
+
+    if(h===false){
+        mButton.disabled = true;
+        eButton.disabled = true;
+    }
+    
 }
 
 function eAns()
@@ -155,18 +160,19 @@ function eAns()
     if(docci==0)
     {
         document.getElementById("setumei").innerText="正解！";
-        if(h==true)
-        {
-            
-            var nButton = document.createElement("input");
-            nButton.type = "button";
-            nButton.value = "次の問題へ";
-            nButton.id = "nButton";
-            var parent=document.getElementById("aButton");
-            parent.appendChild(nButton);
-        }
         score++;
         con++;
+        if(h==true)
+        {
+            // var nButton = document.createElement("input");
+            // nButton.type = "button";
+            // nButton.value = "次の問題へ";
+            // nButton.id = "nButton";
+            // var parent=document.getElementById("aButton");
+            // parent.appendChild(nButton);
+            Next()
+        }
+        
     }
     else
     {
@@ -176,8 +182,10 @@ function eAns()
             End();
         }
     }
-    mButton.disabled = true;
-    eButton.disabled = true;
+    if(h===false){
+        mButton.disabled = true;
+        eButton.disabled = true;
+    }
 }
 
 function Next()

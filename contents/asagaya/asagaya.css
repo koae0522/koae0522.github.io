@@ -7,11 +7,16 @@ body{
 img{
     display:block;
     margin:auto;
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
-
+h2{
+  margin:2px;
+}
+h1{
+  margin:5px;
+}
 #aButton,#eButton,#mButton,#oButton,#start,#h-start,#nButton,#oButton,#nnButton,#nhButton{
-  margin: 20px;
+  /* margin: 20px; */
   font-size: 1.0rem;
   font-weight: 700;
   line-height: 1.5;
